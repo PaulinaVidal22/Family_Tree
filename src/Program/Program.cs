@@ -41,8 +41,19 @@ namespace Program
             n6.AddChildren(n8);
             n6.AddChildren(n9);
 
-            
-            // visitar el árbol aquí
+
+            var ageSumVisitor = new AgeSumVisitor();
+
+            // Luego, realiza el cálculo de la suma de edades llamando a Visit en todos los nodos de interés.
+            n1.Accept(ageSumVisitor); // MaternalGrandFather
+            n2.Accept(ageSumVisitor); // MaternalGrandMother
+            n3.Accept(ageSumVisitor); // PaternalGrandFather
+            n4.Accept(ageSumVisitor); // PaternalGrandMother
+
+            // Obtén la suma de edades.
+            int totalAge = ageSumVisitor.TotalAge;
+            Console.WriteLine("Suma de edades de la familia: " + totalAge);
+
         }
     }
 }
