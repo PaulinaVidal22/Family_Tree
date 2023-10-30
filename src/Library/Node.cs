@@ -10,16 +10,8 @@ namespace Library
 
         private List<Node> children = new List<Node>();
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-        public int Number
-        {
-=======
+
         public Person Person {
->>>>>>> b8f7f7c353e91824d03df65dcb9283e2b7fd3594
-=======
-        public Person Person {
->>>>>>> 7a4ba13662763abb122fc1758773366a07df2230
             get
             {
                 return this.person;
