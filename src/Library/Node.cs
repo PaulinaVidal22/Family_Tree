@@ -9,7 +9,7 @@ namespace Library
         private Person person;
 
         private List<Node> children = new List<Node>();
-
+        public bool Visited { get; set; }
 
         public Person Person {
             get
@@ -35,7 +35,14 @@ namespace Library
         {
             this.children.Add(n);
         }
-        
-        
+        public void Accept(IVisitor visitor)
+        {
+            visitor.Visit(this);
+            foreach (var child in Children)
+            {
+                child.Accept(visitor);
+            }
+        }
+
     }
 }
