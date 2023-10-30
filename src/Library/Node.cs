@@ -6,15 +6,19 @@ namespace Library
 {
     public class Node
     {
-        private int number;
+        private Person person;
 
         private List<Node> children = new List<Node>();
 
+<<<<<<< HEAD
         public int Number
         {
+=======
+        public Person Person {
+>>>>>>> b8f7f7c353e91824d03df65dcb9283e2b7fd3594
             get
             {
-                return this.number;
+                return this.person;
             }
         }
 
@@ -26,9 +30,9 @@ namespace Library
             }
         }
 
-        public Node(int number)
+        public Node(Person person)
         {
-            this.number = number;
+            this.person = person;
         }
 
         public void AddChildren(Node n)
