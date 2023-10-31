@@ -7,6 +7,7 @@ namespace Program
     {
         static void Main(string[] args)
         {
+            //creating the different people that composes our family tree.
             Person MaternalGrandFather = new Person(85, "Carlos", "Masculine");
             Person MaternalGrandMother = new Person(83, "Rosa", "Femenine");
             Person PaternalGrandFather = new Person(75, "Juan", "Masculine");
@@ -18,6 +19,7 @@ namespace Program
             Person Son2 = new Person(5, "Milo", "Masculine");
 
 
+            // creating the different nodes
             Node n1 = new Node(MaternalGrandFather);
             Node n2 = new Node(MaternalGrandMother);
             Node n3 = new Node(PaternalGrandFather);
@@ -28,6 +30,7 @@ namespace Program
             Node n8 = new Node(Daughter);
             Node n9 = new Node(Son2);
 
+            // adds children to the different nodes
             n1.AddChildren(n6);
             n2.AddChildren(n6);
 
@@ -44,16 +47,52 @@ namespace Program
 
             var ageSumVisitor = new AgeSumVisitor();
 
-            // Luego, realiza el cálculo de la suma de edades llamando a Visit en todos los nodos de interés.
+            // Then, perform the age sum calculation by calling Visit on all nodes of interest.
             n1.Accept(ageSumVisitor); // MaternalGrandFather
             n2.Accept(ageSumVisitor); // MaternalGrandMother
             n3.Accept(ageSumVisitor); // PaternalGrandFather
             n4.Accept(ageSumVisitor); // PaternalGrandMother
 
-            // Obtén la suma de edades.
+            // Get the sum of ages
             int totalAge = ageSumVisitor.TotalAge;
-            Console.WriteLine("Suma de edades de la familia: " + totalAge);
+            Console.WriteLine("Sum of the family ages: " + totalAge);
 
+            // Gets the oldest child
+            OldestChildVisitor oldestChildVisitor = new OldestChildVisitor();
+
+            n1.Accept(oldestChildVisitor); // Visits to find the bigger child (leaf node).
+            n2.Accept(oldestChildVisitor);
+            n3.Accept(oldestChildVisitor);
+            n4.Accept(oldestChildVisitor);
+
+            Node oldestChild = oldestChildVisitor.OldestChild;
+
+            if (oldestChildVisitor.OldestChild != null)
+            {
+                Console.WriteLine($"The older child : {oldestChild.Person.Name}");
+            } else
+            {
+                Console.WriteLine("no child was found (leaf node).");
+            }
+
+            // Gets the child with the longest name
+            LongestNameVisitor longestNameVisitor = new LongestNameVisitor();
+
+            n1.Accept(longestNameVisitor); // Visits to find the child with the longest name.
+            n2.Accept(longestNameVisitor);
+            n3.Accept(longestNameVisitor);
+            n4.Accept(longestNameVisitor);
+
+            string longestName = longestNameVisitor.LongestName;
+
+            if (!string.IsNullOrEmpty(longestName))
+            {
+                Console.WriteLine($"The longest name : {longestName}");
+            }
+            else
+            {
+                Console.WriteLine("No name was found in the family tree.");
+            }
         }
     }
 }
