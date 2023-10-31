@@ -57,6 +57,12 @@ namespace Program
             int totalAge = ageSumVisitor.TotalAge;
             Console.WriteLine("Sum of the family ages: " + totalAge);
 
+            // Reset the visited flag before next visit
+            ResetVisitedFlag(n1);
+            ResetVisitedFlag(n2);
+            ResetVisitedFlag(n3);
+            ResetVisitedFlag(n4);
+
             // Gets the oldest child
             OldestChildVisitor oldestChildVisitor = new OldestChildVisitor();
 
@@ -67,13 +73,20 @@ namespace Program
 
             Node oldestChild = oldestChildVisitor.OldestChild;
 
-            if (oldestChildVisitor.OldestChild != null)
+            if (oldestChild != null)
             {
-                Console.WriteLine($"The older child : {oldestChild.Person.Name}");
-            } else
-            {
-                Console.WriteLine("no child was found (leaf node).");
+                Console.WriteLine($"The older child: {oldestChild.Person.Name}");
             }
+            else
+            {
+                Console.WriteLine("No child was found (leaf node).");
+            }
+
+            // Reset the visited flag before next visit
+            ResetVisitedFlag(n1);
+            ResetVisitedFlag(n2);
+            ResetVisitedFlag(n3);
+            ResetVisitedFlag(n4);
 
             // Gets the child with the longest name
             LongestNameVisitor longestNameVisitor = new LongestNameVisitor();
@@ -87,11 +100,20 @@ namespace Program
 
             if (!string.IsNullOrEmpty(longestName))
             {
-                Console.WriteLine($"The longest name : {longestName}");
+                Console.WriteLine($"The longest name: {longestName}");
             }
             else
             {
                 Console.WriteLine("No name was found in the family tree.");
+            }
+        }
+
+        public static void ResetVisitedFlag(Node node)
+        {
+            node.Visited = false;
+            foreach (var child in node.Children)
+            {
+                ResetVisitedFlag(child);
             }
         }
     }
