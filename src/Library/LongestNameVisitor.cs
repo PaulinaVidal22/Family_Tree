@@ -8,7 +8,7 @@ namespace Library
         {
             if (!node.Visited)
             {
-                if (LongestName == null || node.Person.Name.Length > LongestName.Length )
+                if (string.IsNullOrEmpty(LongestName) || node.Person.Name.Length > LongestName.Length)
                 {
                     LongestName = node.Person.Name;
                 }
