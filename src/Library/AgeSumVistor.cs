@@ -1,5 +1,6 @@
-namespace Library;
-public class AgeSumVisitor : IVisitor
+namespace Library
+{
+    public class AgeSumVisitor : IVisitor
 {
     public int TotalAge { get; private set; }
 
@@ -16,4 +17,6 @@ public class AgeSumVisitor : IVisitor
             }
         }
     }
+}
+
 }
